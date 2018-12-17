@@ -8,9 +8,18 @@
   <title>Document</title>
 </head>
 <body>
-  <div id="app">{{ message }}</div>
+  <div id="app">
+    <h1>Vue从入门到熟悉</h1>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-9">list</div>
+        <div class="col-md-3">filter</div>
+      </div>
+    </div>
+  </div>
 </body>
 <script src="./node_modules/vue/dist/vue.js"></script>
+<script src="./src/main.js"></script>
 <script>
 let vm = new Vue({
   el: '#app',
