@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="./src/main.css">
   <title>Document</title>
 </head>
 <body>
@@ -12,8 +13,35 @@
     <h1>Vue从入门到熟悉</h1>
     <div class="container">
       <div class="row">
-        <div class="col-md-9">list</div>
-        <div class="col-md-3">filter</div>
+        <div class="col-md-12">nav</div>
+      </div>
+      <div class="row">
+        <div class="col-md-9">
+          <div class="movie-item" v-for="movie in movies">
+            <img class="movie-poster" v-bind:src="movie.poster" v-bind:alt="movie.title">
+            <div class="movie-info">
+              <h2>{{ movie.title }}</h2>
+              <div>
+                <span class="movie-label">评分: </span>{{ movie.rating }}<br/>
+                <span class="movie-label">类型: </span>{{ movie.genre }}<br/>
+                <span class="movie-label">排期: </span><br/>
+                <p>
+                  <button class="btn btn-sm btn-primary">12:30</button>
+                  <button class="btn btn-sm btn-primary">12:30</button>
+                  <button class="btn btn-sm btn-primary">12:30</button>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <section>
+            <h3>影片类型</h3>
+            <ul>
+              <li v-for="genre in genres">{{ genre }}</li>
+            </ul>
+          </section>
+        </div>
       </div>
     </div>
   </div>
@@ -24,7 +52,13 @@
 let vm = new Vue({
   el: '#app',
   data: {
-    message: 'Hello'
+    movies: [
+      {poster: 'https://img1.doubanio.com/view/photo/s_ratio_poster/public/p2541280047.webp', title: '海王', rating: 7.9, genre: '动作 / 奇幻 / 冒险'},
+      {poster: 'https://img1.doubanio.com/view/photo/s_ratio_poster/public/p2529389608.webp', title: '蚁人2：黄蜂女现身', rating: 7.3, genre: '动作 / 科幻 / 冒险'}
+    ],
+    genres: [
+      '动作', '科幻', '奇幻', '冒险'
+    ]
   }
 })
 </script>
