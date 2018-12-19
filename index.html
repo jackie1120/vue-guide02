@@ -17,8 +17,26 @@
       </div>
       <div class="row">
         <div class="col-md-9">
-          <div class="movie-item" v-for="movie in movies">
-            <img class="movie-poster" v-bind:src="movie.poster" v-bind:alt="movie.title">
+          <movie-item @show-detail="showDetail(movie)" v-for="movie in movies" :movie="movie"></movie-item>
+        </div>
+        <div class="col-md-3">
+          <section>
+            <h3>影片类型</h3>
+            <ul>
+              <li is="filter-item" v-for="genre in genres" :item="genre"></li>
+            </ul>
+          </section>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+<script src="./node_modules/vue/dist/vue.js"></script>
+<script src="./src/main.js"></script>
+<script>
+Vue.component('movie-item', {
+  template: `<div class="movie-item">
+            <img @click="emmitShowDetail" class="movie-poster" v-bind:src="movie.poster" v-bind:alt="movie.title">
             <div class="movie-info">
               <h2>{{ movie.title }}</h2>
               <div>
@@ -32,23 +50,18 @@
                 </p>
               </div>
             </div>
-          </div>
-        </div>
-        <div class="col-md-3">
-          <section>
-            <h3>影片类型</h3>
-            <ul>
-              <li v-for="genre in genres">{{ genre }}</li>
-            </ul>
-          </section>
-        </div>
-      </div>
-    </div>
-  </div>
-</body>
-<script src="./node_modules/vue/dist/vue.js"></script>
-<script src="./src/main.js"></script>
-<script>
+          </div>`,
+  data() {
+    return {}
+  },
+  props:['movie'],
+  methods: {
+    emmitShowDetail: function() {
+      this.$emit('show-detail')
+    }
+  }
+});
+
 let vm = new Vue({
   el: '#app',
   data: {
@@ -59,6 +72,20 @@ let vm = new Vue({
     genres: [
       '动作', '科幻', '奇幻', '冒险'
     ]
+  },
+  components: {
+    'filter-item': {
+      template: `<li>{{ item }}</li>`,
+      data() {
+        return {}
+      },
+      props:['item']
+    }
+  },
+  methods: {
+    showDetail: function(movie) {
+      console.log(movie.title)
+    }
   }
 })
 </script>
